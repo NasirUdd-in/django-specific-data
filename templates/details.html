@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Posts</title>
+</head>
+<body>
+    <h1>My Posts</h1>
+    
+         <a href="{% url 'logout' %}">Sign Out</a>
+        <p>{{user_details.user.username}}</p>
+        <p>{{user_details.bio}}</p>
+    
+        <p>No posts available.</p>
+   
+</body>
+</html>
