@@ -26,3 +26,13 @@ class UserProfile(models.Model):
 
     def __str__(self):
         return self.user.username
+
+class MyRequest(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE )
+    STATUS_CHOICES = (
+        ('pending', 'Pending'),
+        ('approved', 'Approved'),
+        ('canceled', 'Canceled')
+    )
+
+    status = models.CharField(max_length=10, choices= STATUS_CHOICES, default= 'pending')

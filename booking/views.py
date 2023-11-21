@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from rest_framework.generics import ListAPIView, CreateAPIView, DestroyAPIView, UpdateAPIView
 
 from .serializers import AuthorSerializer, PostSerializer
-from .models import Author, Post, UserProfile
+from .models import Author, Post, UserProfile, MyRequest
 
 from django.http import HttpResponse
 from django.template import loader
@@ -74,11 +74,13 @@ def user_login(request):
 def my_details(request):
     try:
         user_details = UserProfile.objects.get(user=request.user)
+        user_request = MyRequest.objects.get(user= request.user )
     except UserProfile.DoesNotExist:
         # Handle the case where the user profile does not exist
         user_details = None
+        user_request = None
     
-    context = {'user_details': user_details}
+    context = {'user_details': user_details, 'user_request': user_request}
     return render(request, 'details.html', context)
 
 @login_required
